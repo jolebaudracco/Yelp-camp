@@ -1,4 +1,7 @@
-//app.js --> Es el archivo principal, contiene la configuración de Express, la conexión a la base de datos y las rutas
+if(process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 
 const express = require('express');
 const path = require('path');
