@@ -21,11 +21,6 @@
                 </div>
     
                 <div class="mb-3">
-                    <label class="form-label" for="image">Add images</label>
-                    <input type="file" name="image" id="image" multiple>
-                </div>
-    
-                <div class="mb-3">
                     <label class="form-label" for="Price">Campground Price</label>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">$</span>
@@ -43,7 +38,23 @@
                         Looks Good!
                     </div>
                 </div>
-    
+                <div class="mb-3">
+                <label for="">Add other images</label>
+                    <label for="customFile"style="display: flex; align-items: center; border: 1px solid #ced4da; border-radius: 0.40rem; padding: 0.3rem; width: 100%; max-width: 700px; justify-content: space-between; background-color: #f8f9fa; cursor: pointer;">
+                    <input type="file" name="images" id="customFile" multiple style="display: none;" onchange="this.nextElementSibling.innerText = this.files.length ? Array.from(this.files).map(file => file.name).join(', ') : 'Choose file...';">
+                    <span class="form-file-text custom-file-label" style="margin-left: 0.5rem; color: #6c757d;" >Add more image(s)...</span>
+                    <span style="background-color: #e9ecef; padding: 0.3rem 1rem; border-radius: 0.25rem; font-weight: 500;">Browse</span>
+                </label>
+            </div>
+            <div class="mb-3">
+                <% campground.images.forEach(function(img, i) { %>
+                    <img src="<%=img.url%>" class="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                    </div>
+                    <label for="image-<%=i%>">Delete?</label>
+                <% }) %>                   
+            </div>
                 <div class="mb-3">
                     <button class="btn btn-info">Update Campground</button>
                 </div>
