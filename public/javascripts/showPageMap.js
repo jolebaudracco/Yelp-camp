@@ -7,6 +7,8 @@ const map = new maptilersdk.Map({
   zoom: 10
 });
 
+map.addControl(new maptilersdk.NavigationControl());
+
 new maptilersdk.Marker()
     .setLngLat(campground.geometry.coordinates)
     .setPopup(

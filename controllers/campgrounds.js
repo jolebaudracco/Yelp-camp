@@ -1,6 +1,12 @@
 const Campground = require('../models/campground');
 const maptilerClient = require("@maptiler/client");
 maptilerClient.config.apiKey = process.env.MAPTILER_API_KEY;
+
+(async () => {
+    const fetch = (await import('node-fetch')).default;
+    maptilerClient.config.fetch = fetch;
+})();
+
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
@@ -13,9 +19,6 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createCampground = async(req, res, next) => {
-
-    const fetch = (await import('node-fetch')).default;
-    maptilerClient.config.fetch = fetch;
 
     const geoData = await maptilerClient.geocoding.forward(req.body.campground.location, { limit: 1 });
 
